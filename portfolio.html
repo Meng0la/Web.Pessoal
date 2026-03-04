@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriel Mengue Barros | Cybersecurity Portfolio</title>
+  <meta name="description" content="Portfolio Gabriel Mengue Barros">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body class="mode-standard">
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <div class="mode-picker" id="modePicker">
+    <div class="mode-picker-panel">
+      <p class="mode-picker-label" data-i18n="mode_label">Modo Principal</p>
+      <h2 data-i18n="mode_title">Escolha o tipo de portfolio</h2>
+      <div class="mode-picker-actions">
+        <button type="button" class="action-btn" data-choose-mode="standard" data-i18n="mode_standard">Portfolio Padrao</button>
+        <button type="button" class="action-btn accent" data-choose-mode="interactive" data-i18n="mode_interactive">Portfolio Interativo</button>
+      </div>
+      <p class="mode-picker-note" data-i18n="mode_note">Ambos com estilo cyber. O modo interativo habilita animacoes e efeitos extras.</p>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-top">
+      <p class="eyebrow" data-i18n="eyebrow">Portfolio Pessoal</p>
+      <div class="hero-actions">
+        <div class="lang-switch" aria-label="Language switcher">
+          <button type="button" class="lang-btn active" data-set-lang="pt">PT</button>
+          <button type="button" class="lang-btn" data-set-lang="en">EN</button>
+        </div>
+        <a class="action-btn" href="Curriculo_Gabriel_Mengue_Barros-2026.pdf" download data-i18n="download_cv">Baixar Curriculo</a>
+        <button type="button" id="effectsToggle" class="ghost-btn">Desativar Efeitos</button>
+      </div>
+    </div>
+
+    <h1>Gabriel Mengue Barros</h1>
+    <p class="headline" id="headlineText" data-i18n="headline">Cybersecurity Researcher | Offensive Security | Tool Builder</p>
+
+    <blockquote>
+      <p data-i18n="quote_pt">Eu nao posso saber tudo. Mas eu fuço ate descobrir.</p>
+      <p class="quote-en" data-i18n="quote_en">I may not know everything. But I will dig until I understand it.</p>
+    </blockquote>
+
+    <div class="badge-row">
+      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+      <img src="https://img.shields.io/badge/OSINT-0f0f0f?style=for-the-badge&logo=probot&logoColor=white" alt="OSINT">
+      <img src="https://img.shields.io/badge/Offensive_Security-8B0000?style=for-the-badge" alt="Offensive Security">
+      <img src="https://img.shields.io/badge/Reconnaissance-004225?style=for-the-badge" alt="Reconnaissance">
+      <img src="https://img.shields.io/badge/Automation-1b4332?style=for-the-badge" alt="Automation">
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <h2 data-i18n="nav_title">Navegacao</h2>
+      <nav class="tabs" aria-label="Secoes do portfolio" data-i18n-aria-label="nav_aria">
+        <button class="tab-btn active" data-tab="about" data-i18n="tab_about">About Me</button>
+        <button class="tab-btn" data-tab="mindset" data-i18n="tab_mindset">Security Mindset</button>
+        <button class="tab-btn" data-tab="projects" data-i18n="tab_projects">Projects</button>
+        <button class="tab-btn" data-tab="tools" data-i18n="tab_tools">Tools & Technologies</button>
+        <button class="tab-btn" data-tab="focus" data-i18n="tab_focus">Cybersecurity Focus</button>
+        <button class="tab-btn" data-tab="research" data-i18n="tab_research">Research & Experiments</button>
+        <button class="tab-btn" data-tab="stats" data-i18n="tab_stats">GitHub Stats</button>
+        <button class="tab-btn" data-tab="contact" data-i18n="tab_contact">Contact</button>
+      </nav>
+    </aside>
+
+    <section class="content">
+      <article id="about" class="tab-panel active">
+        <h2 data-i18n="about_title">About Me</h2>
+        <p data-i18n="about_p1">Desenvolvedor e pesquisador em Cybersecurity com foco em seguranca ofensiva, automacao de recon e engenharia de ferramentas para analise tecnica de superficie de ataque.</p>
+        <p data-i18n="about_p2">Minha abordagem combina pensamento de Red Team, pratica de laboratorio e construcao de scripts/frameworks para coleta, tratamento e correlacao de dados publicos.</p>
+        <ul>
+          <li data-i18n="about_l1">Foco principal: Reconnaissance, OSINT e Offensive Tooling.</li>
+          <li data-i18n="about_l2">Stack central: Python, Networking, Linux/Kali Linux e CLI tooling.</li>
+          <li data-i18n="about_l3">Atuacao: pesquisa aplicada, experimentos controlados e documentacao tecnica.</li>
+        </ul>
+      </article>
+
+      <article id="mindset" class="tab-panel">
+        <h2 data-i18n="mind_title">Security Mindset</h2>
+        <p data-i18n="mind_p1">Portfolio orientado para perfil de pesquisador e builder de ferramentas, nao apenas execucao de tarefas de desenvolvimento tradicional.</p>
+        <ul>
+          <li data-i18n="mind_l1">Pensamento adversarial com responsabilidade e escopo autorizado.</li>
+          <li data-i18n="mind_l2">Validacao tecnica por hipoteses, baseline de comportamento e evidencia reproduzivel.</li>
+          <li data-i18n="mind_l3">Automacao para reduzir ruido operacional e aumentar precisao investigativa.</li>
+          <li data-i18n="mind_l4">Estudo de ataque para fortalecer arquitetura e defesa.</li>
+        </ul>
+      </article>
+
+      <article id="projects" class="tab-panel">
+        <h2 data-i18n="projects_title">Projects</h2>
+        <div class="cards">
+          <section class="card">
+            <h3>ReconSpider</h3>
+            <p data-i18n="project_recon_desc">Framework modular de auditoria ofensiva em Python com modulos de dorks, crawler/sitemap, enumeracao de diretorios, analise de JavaScript, portscan, autenticacao e SQLi heuristico.</p>
+            <a href="https://github.com/Meng0la/ReconSpider" target="_blank" rel="noopener noreferrer" data-i18n="open_repo">Abrir repositorio</a>
+          </section>
+
+          <section class="card">
+            <h3>Buscador-de-Mapas</h3>
+            <p data-i18n="project_maps_desc">Pipeline de coleta e enriquecimento de dados via OpenStreetMap (Overpass + Nominatim), com tratamento e consolidacao de resultados para analise.</p>
+            <a href="https://github.com/Meng0la/Buscador-de-Mapas" target="_blank" rel="noopener noreferrer" data-i18n="open_repo">Abrir repositorio</a>
+          </section>
+
+          <section class="card">
+            <h3>controle_de_notas</h3>
+            <p data-i18n="project_notes_desc">Extracao de dados fiscais a partir de documentos nao estruturados (PDF/texto), com parsing heuristico e organizacao para analise financeira e operacional.</p>
+            <a href="https://github.com/Meng0la/controle_de_notas" target="_blank" rel="noopener noreferrer" data-i18n="open_repo">Abrir repositorio</a>
+          </section>
+
+          <section class="card">
+            <h3>bot_wpps</h3>
+            <p data-i18n="project_bot_desc">Integracao de webhook WhatsApp com automacao Python e SQLite, com foco em fluxos de consulta/cadastro e integracao de dados.</p>
+            <a href="https://github.com/Meng0la/bot_wpps" target="_blank" rel="noopener noreferrer" data-i18n="open_repo">Abrir repositorio</a>
+          </section>
+
+          <section class="card">
+            <h3>Site_Login</h3>
+            <p data-i18n="project_login_desc">Laboratorio em PHP para autenticacao, sessao e controle de permissoes, usado para estudos de seguranca em backend web.</p>
+            <a href="https://github.com/Meng0la/Site_Login" target="_blank" rel="noopener noreferrer" data-i18n="open_repo">Abrir repositorio</a>
+          </section>
+
+          <section class="card warning-card">
+            <h3 data-i18n="ransom_title">Framework de Estudo de Ransomware</h3>
+            <p data-i18n="ransom_p1">Projeto privado de pesquisa defensiva para analise de comportamento, vetores de impacto e pontos de deteccao/mitigacao em ambiente isolado.</p>
+            <p data-i18n="ransom_p2">Este framework nao e publico por seguranca operacional, responsabilidade etica e para evitar exposicao de material sensivel que possa ser mal utilizado.</p>
+            <span class="tag" data-i18n="ransom_tag">Estudo privado | Sem link de repositorio</span>
+          </section>
+        </div>
+      </article>
+
+      <article id="tools" class="tab-panel">
+        <h2 data-i18n="tools_title">Tools & Technologies</h2>
+        <div class="badge-cloud">
+          <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+          <img src="https://img.shields.io/badge/Networking-0A66C2?style=flat-square&logo=cloudflare&logoColor=white" alt="Networking">
+          <img src="https://img.shields.io/badge/OSINT-111111?style=flat-square&logo=probot&logoColor=white" alt="OSINT">
+          <img src="https://img.shields.io/badge/Automation-1B5E20?style=flat-square&logo=ansible&logoColor=white" alt="Automation">
+          <img src="https://img.shields.io/badge/Web_Scraping-2E8B57?style=flat-square&logo=scrapy&logoColor=white" alt="Web Scraping">
+          <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
+          <img src="https://img.shields.io/badge/Kali_Linux-268BEE?style=flat-square&logo=kalilinux&logoColor=white" alt="Kali Linux">
+          <img src="https://img.shields.io/badge/CLI_Tools-20232A?style=flat-square&logo=gnubash&logoColor=white" alt="CLI Tools">
+          <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+          <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP">
+          <img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
+          <img src="https://img.shields.io/badge/Git-181717?style=flat-square&logo=git&logoColor=white" alt="Git">
+        </div>
+      </article>
+
+      <article id="focus" class="tab-panel">
+        <h2 data-i18n="focus_title">Cybersecurity Focus</h2>
+        <ul>
+          <li data-i18n="focus_l1">Web reconnaissance e mapeamento de superficie de ataque.</li>
+          <li data-i18n="focus_l2">OSINT para coleta e correlacao de sinais publicos.</li>
+          <li data-i18n="focus_l3">Analise de autenticacao, endpoints e exposicao de ativos.</li>
+          <li data-i18n="focus_l4">Automacao ofensiva controlada para pesquisa e aprendizado defensivo.</li>
+        </ul>
+      </article>
+
+      <article id="research" class="tab-panel">
+        <h2 data-i18n="research_title">Research & Experiments</h2>
+        <h3 data-i18n="methods_title">Metodologias utilizadas</h3>
+        <ul>
+          <li data-i18n="methods_l1">OSINT: descoberta e validacao de fontes publicas.</li>
+          <li data-i18n="methods_l2">Recon: enumeracao de URLs, diretorios, portas e autenticacao.</li>
+          <li data-i18n="methods_l3">Automacao: pipelines de coleta e tratamento de dados.</li>
+        </ul>
+
+        <h3 data-i18n="roadmap_title">Roadmap de pesquisa</h3>
+        <ul>
+          <li data-i18n="roadmap_l1">Aprimorar frameworks modulares para recon e triagem tecnica.</li>
+          <li data-i18n="roadmap_l2">Expandir laboratorio de analise de comportamento de ameacas.</li>
+          <li data-i18n="roadmap_l3">Fortalecer telemetria de rede e correlacao de eventos.</li>
+          <li data-i18n="roadmap_l4">Produzir documentacao tecnica voltada para mitigacao e hardening.</li>
+        </ul>
+      </article>
+
+      <article id="stats" class="tab-panel">
+        <h2 data-i18n="stats_title">GitHub Stats</h2>
+        <p class="small-note" data-i18n="stats_note">Snapshot de perfil tecnico com dados dinamicos do GitHub.</p>
+        <div class="stats-grid">
+          <img src="https://github-readme-stats.vercel.app/api?username=Meng0la&show_icons=true&theme=chartreuse-dark&hide_border=true" alt="GitHub stats de Meng0la">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Meng0la&layout=compact&theme=chartreuse-dark&hide_border=true" alt="Top linguagens de Meng0la">
+          <img src="https://streak-stats.demolab.com?user=Meng0la&theme=chartreuse-dark&hide_border=true" alt="GitHub streak de Meng0la">
+        </div>
+      </article>
+
+      <article id="contact" class="tab-panel">
+        <h2 data-i18n="contact_title">Contact</h2>
+        <div class="contact-layout">
+          <section class="contact-card">
+            <h3 data-i18n="contact_form_title">Enviar mensagem (mailto)</h3>
+            <form id="contactForm">
+              <label for="name" data-i18n="label_name">Nome</label>
+              <input id="name" name="name" type="text" data-i18n-placeholder="ph_name" placeholder="Seu nome" required>
+
+              <label for="email" data-i18n="label_email">Seu e-mail</label>
+              <input id="email" name="email" type="email" data-i18n-placeholder="ph_email" placeholder="voce@email.com" required>
+
+              <label for="subject" data-i18n="label_subject">Assunto</label>
+              <input id="subject" name="subject" type="text" data-i18n-placeholder="ph_subject" placeholder="Assunto da mensagem" required>
+
+              <label for="message" data-i18n="label_message">Mensagem</label>
+              <textarea id="message" name="message" rows="5" data-i18n-placeholder="ph_message" placeholder="Digite sua mensagem..." required></textarea>
+
+              <button type="submit" class="action-btn accent" data-i18n="open_email">Abrir no e-mail</button>
+            </form>
+          </section>
+
+          <section class="contact-card">
+            <h3 data-i18n="contact_direct_title">Contato direto</h3>
+            <p>
+              <span data-i18n="direct_email_label">E-mail:</span>
+              <a href="mailto:g.menguebarros@gmail.com">g.menguebarros@gmail.com</a>
+            </p>
+            <p>
+              <span data-i18n="direct_whats_label">WhatsApp:</span>
+              <a href="https://wa.me/5547984383436" target="_blank" rel="noopener noreferrer">(47) 98438-3436</a>
+            </p>
+            <a class="action-btn" href="Curriculo_Gabriel_Mengue_Barros-2026.pdf" download data-i18n="download_cv">Baixar Curriculo</a>
+            <a class="action-btn wa-btn" href="https://wa.me/5547984383436?text=Ola%20Gabriel%2C%20vi%20seu%20portfolio%20e%20quero%20falar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer" data-i18n="open_whatsapp">Chamar no WhatsApp</a>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p data-i18n="footer_line">Gabriel Mengue Barros • Security Researcher focused on Reconnaissance, OSINT and Offensive Tooling</p>
+  </footer>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>

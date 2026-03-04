@@ -1,0 +1,419 @@
+﻿(function () {
+  const body = document.body;
+  const html = document.documentElement;
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabPanels = document.querySelectorAll(".tab-panel");
+  const modePicker = document.getElementById("modePicker");
+  const chooseModeButtons = document.querySelectorAll("[data-choose-mode]");
+  const effectsToggle = document.getElementById("effectsToggle");
+  const contactForm = document.getElementById("contactForm");
+  const langButtons = document.querySelectorAll("[data-set-lang]");
+
+  const MODE_KEY = "portfolio_mode";
+  const EFFECTS_KEY = "portfolio_effects";
+  const LANG_KEY = "portfolio_lang";
+  const EMAIL_TARGET = "g.menguebarros@gmail.com";
+
+  const i18n = {
+    pt: {
+      mode_label: "Modo Principal",
+      mode_title: "Escolha o tipo de portfolio",
+      mode_standard: "Portfolio Padrao",
+      mode_interactive: "Portfolio Interativo",
+      mode_note: "Ambos com estilo cyber. O modo interativo habilita animacoes e efeitos extras.",
+      eyebrow: "Portfolio Pessoal",
+      download_cv: "Baixar Curriculo",
+      effects_disable: "Desativar Efeitos",
+      effects_enable: "Ativar Efeitos",
+      headline: "Cybersecurity Researcher | Offensive Security | Tool Builder",
+      quote_pt: "Eu nao posso saber tudo. Mas eu fuço ate descobrir.",
+      quote_en: "I may not know everything. But I will dig until I understand it.",
+      nav_title: "Navegacao",
+      nav_aria: "Secoes do portfolio",
+      tab_about: "About Me",
+      tab_mindset: "Security Mindset",
+      tab_projects: "Projects",
+      tab_tools: "Tools & Technologies",
+      tab_focus: "Cybersecurity Focus",
+      tab_research: "Research & Experiments",
+      tab_stats: "GitHub Stats",
+      tab_contact: "Contact",
+      about_title: "About Me",
+      about_p1: "Desenvolvedor e pesquisador em Cybersecurity com foco em seguranca ofensiva, automacao de recon e engenharia de ferramentas para analise tecnica de superficie de ataque.",
+      about_p2: "Minha abordagem combina pensamento de Red Team, pratica de laboratorio e construcao de scripts/frameworks para coleta, tratamento e correlacao de dados publicos.",
+      about_l1: "Foco principal: Reconnaissance, OSINT e Offensive Tooling.",
+      about_l2: "Stack central: Python, Networking, Linux/Kali Linux e CLI tooling.",
+      about_l3: "Atuacao: pesquisa aplicada, experimentos controlados e documentacao tecnica.",
+      mind_title: "Security Mindset",
+      mind_p1: "Portfolio orientado para perfil de pesquisador e builder de ferramentas, nao apenas execucao de tarefas de desenvolvimento tradicional.",
+      mind_l1: "Pensamento adversarial com responsabilidade e escopo autorizado.",
+      mind_l2: "Validacao tecnica por hipoteses, baseline de comportamento e evidencia reproduzivel.",
+      mind_l3: "Automacao para reduzir ruido operacional e aumentar precisao investigativa.",
+      mind_l4: "Estudo de ataque para fortalecer arquitetura e defesa.",
+      projects_title: "Projects",
+      project_recon_desc: "Framework modular de auditoria ofensiva em Python com modulos de dorks, crawler/sitemap, enumeracao de diretorios, analise de JavaScript, portscan, autenticacao e SQLi heuristico.",
+      project_maps_desc: "Pipeline de coleta e enriquecimento de dados via OpenStreetMap (Overpass + Nominatim), com tratamento e consolidacao de resultados para analise.",
+      project_notes_desc: "Extracao de dados fiscais a partir de documentos nao estruturados (PDF/texto), com parsing heuristico e organizacao para analise financeira e operacional.",
+      project_bot_desc: "Integracao de webhook WhatsApp com automacao Python e SQLite, com foco em fluxos de consulta/cadastro e integracao de dados.",
+      project_login_desc: "Laboratorio em PHP para autenticacao, sessao e controle de permissoes, usado para estudos de seguranca em backend web.",
+      open_repo: "Abrir repositorio",
+      ransom_title: "fremek_rans.py (Estudo de Ransomware)",
+      ransom_p1: "Script educacional de ransomware para laboratorio controlado. Ele simula criptografia de arquivos comuns com AES-GCM, renomeacao para .encrypted e alertas visuais em japones para reproduzir impacto de phishing e resposta a incidente.",
+      ransom_p2: "Tambem possui modulos opcionais para estudo tecnico (anti-sandbox, persistencia e movimento lateral por ARP scan). O projeto nao e publico para evitar abuso e manter o uso estritamente defensivo em ambiente isolado.",
+      ransom_tag: "Projeto privado | Sem link de repositorio",
+      tools_title: "Tools & Technologies",
+      focus_title: "Cybersecurity Focus",
+      focus_l1: "Web reconnaissance e mapeamento de superficie de ataque.",
+      focus_l2: "OSINT para coleta e correlacao de sinais publicos.",
+      focus_l3: "Analise de autenticacao, endpoints e exposicao de ativos.",
+      focus_l4: "Automacao ofensiva controlada para pesquisa e aprendizado defensivo.",
+      research_title: "Research & Experiments",
+      methods_title: "Metodologias utilizadas",
+      methods_l1: "OSINT: descoberta e validacao de fontes publicas.",
+      methods_l2: "Recon: enumeracao de URLs, diretorios, portas e autenticacao.",
+      methods_l3: "Automacao: pipelines de coleta e tratamento de dados.",
+      roadmap_title: "Roadmap de pesquisa",
+      roadmap_l1: "Aprimorar frameworks modulares para recon e triagem tecnica.",
+      roadmap_l2: "Expandir laboratorio de analise de comportamento de ameacas.",
+      roadmap_l3: "Fortalecer telemetria de rede e correlacao de eventos.",
+      roadmap_l4: "Produzir documentacao tecnica voltada para mitigacao e hardening.",
+      stats_title: "GitHub Stats",
+      stats_note: "Snapshot de perfil tecnico com dados dinamicos do GitHub.",
+      contact_title: "Contact",
+      contact_form_title: "Enviar mensagem (mailto)",
+      label_name: "Nome",
+      label_email: "Seu e-mail",
+      label_subject: "Assunto",
+      label_message: "Mensagem",
+      ph_name: "Seu nome",
+      ph_email: "voce@email.com",
+      ph_subject: "Assunto da mensagem",
+      ph_message: "Digite sua mensagem...",
+      open_email: "Abrir no e-mail",
+      contact_direct_title: "Contato direto",
+      direct_email_label: "E-mail:",
+      direct_whats_label: "WhatsApp:",
+      open_whatsapp: "Chamar no WhatsApp",
+      footer_line: "Gabriel Mengue Barros • Security Researcher focused on Reconnaissance, OSINT and Offensive Tooling",
+      mail_subject_default: "Contato via Portfolio",
+      mail_label_name: "Nome",
+      mail_label_email: "E-mail"
+    },
+    en: {
+      mode_label: "Main Mode",
+      mode_title: "Choose the portfolio type",
+      mode_standard: "Standard Portfolio",
+      mode_interactive: "Interactive Portfolio",
+      mode_note: "Both keep a cyber style. Interactive mode enables extra animations and effects.",
+      eyebrow: "Personal Portfolio",
+      download_cv: "Download Resume",
+      effects_disable: "Disable Effects",
+      effects_enable: "Enable Effects",
+      headline: "Cybersecurity Researcher | Offensive Security | Tool Builder",
+      quote_pt: "I may not know everything. But I will dig until I understand it.",
+      quote_en: "Eu nao posso saber tudo. Mas eu fuço ate descobrir.",
+      nav_title: "Navigation",
+      nav_aria: "Portfolio sections",
+      tab_about: "About Me",
+      tab_mindset: "Security Mindset",
+      tab_projects: "Projects",
+      tab_tools: "Tools & Technologies",
+      tab_focus: "Cybersecurity Focus",
+      tab_research: "Research & Experiments",
+      tab_stats: "GitHub Stats",
+      tab_contact: "Contact",
+      about_title: "About Me",
+      about_p1: "Developer and Cybersecurity researcher focused on offensive security, recon automation and tool engineering for attack surface analysis.",
+      about_p2: "My approach combines Red Team thinking, lab practice and script/framework building for collection, processing and correlation of public data.",
+      about_l1: "Main focus: Reconnaissance, OSINT and Offensive Tooling.",
+      about_l2: "Core stack: Python, Networking, Linux/Kali Linux and CLI tooling.",
+      about_l3: "Work style: applied research, controlled experiments and technical documentation.",
+      mind_title: "Security Mindset",
+      mind_p1: "Portfolio shaped as a researcher and tool-builder profile, not only traditional software development execution.",
+      mind_l1: "Adversarial thinking with responsibility and authorized scope.",
+      mind_l2: "Technical validation through hypotheses, behavior baseline and reproducible evidence.",
+      mind_l3: "Automation to reduce operational noise and increase investigative accuracy.",
+      mind_l4: "Study attack paths to strengthen architecture and defense.",
+      projects_title: "Projects",
+      project_recon_desc: "Modular offensive auditing framework in Python with dorking, crawler/sitemap, directory enumeration, JavaScript analysis, port scanning, auth checks and heuristic SQLi testing.",
+      project_maps_desc: "Data collection and enrichment pipeline using OpenStreetMap (Overpass + Nominatim), including processing and result consolidation for analysis.",
+      project_notes_desc: "Fiscal data extraction from unstructured documents (PDF/text) with heuristic parsing and organization for financial and operational analysis.",
+      project_bot_desc: "WhatsApp webhook integration with Python automation and SQLite, focused on query/register flows and data integration.",
+      project_login_desc: "PHP lab for authentication, session handling and permission control used in backend security studies.",
+      open_repo: "Open repository",
+      ransom_title: "fremek_rans.py (Ransomware Study)",
+      ransom_p1: "Educational ransomware script for controlled lab use. It simulates encryption of common files with AES-GCM, renaming to .encrypted, and repeated Japanese warning popups to emulate phishing impact and incident response pressure.",
+      ransom_p2: "It also includes optional study modules (anti-sandbox, persistence and ARP-scan lateral movement). This project is kept private to prevent misuse and preserve strictly defensive research in isolated environments.",
+      ransom_tag: "Private project | No repository link",
+      tools_title: "Tools & Technologies",
+      focus_title: "Cybersecurity Focus",
+      focus_l1: "Web reconnaissance and attack surface mapping.",
+      focus_l2: "OSINT for public-signal collection and correlation.",
+      focus_l3: "Authentication, endpoint and asset exposure analysis.",
+      focus_l4: "Controlled offensive automation for research and defensive learning.",
+      research_title: "Research & Experiments",
+      methods_title: "Applied methodologies",
+      methods_l1: "OSINT: discovery and validation of public sources.",
+      methods_l2: "Recon: URL, directory, port and authentication enumeration.",
+      methods_l3: "Automation: data collection and treatment pipelines.",
+      roadmap_title: "Research roadmap",
+      roadmap_l1: "Improve modular frameworks for recon and technical triage.",
+      roadmap_l2: "Expand behavior-analysis lab for threat scenarios.",
+      roadmap_l3: "Strengthen network telemetry and event correlation.",
+      roadmap_l4: "Produce technical documentation focused on mitigation and hardening.",
+      stats_title: "GitHub Stats",
+      stats_note: "Technical profile snapshot with dynamic GitHub data.",
+      contact_title: "Contact",
+      contact_form_title: "Send message (mailto)",
+      label_name: "Name",
+      label_email: "Your email",
+      label_subject: "Subject",
+      label_message: "Message",
+      ph_name: "Your name",
+      ph_email: "you@email.com",
+      ph_subject: "Message subject",
+      ph_message: "Write your message...",
+      open_email: "Open in email",
+      contact_direct_title: "Direct contact",
+      direct_email_label: "Email:",
+      direct_whats_label: "WhatsApp:",
+      open_whatsapp: "Message on WhatsApp",
+      footer_line: "Gabriel Mengue Barros • Security Researcher focused on Reconnaissance, OSINT and Offensive Tooling",
+      mail_subject_default: "Portfolio Contact",
+      mail_label_name: "Name",
+      mail_label_email: "Email"
+    }
+  };
+
+  let currentLang = "pt";
+  let matrixAnimationId = null;
+  let matrixRunning = false;
+  let matrixResizeHandler = null;
+
+  function t(key) {
+    const bundle = i18n[currentLang] || i18n.pt;
+    return bundle[key] || key;
+  }
+
+  function applyLanguage(lang) {
+    currentLang = lang === "en" ? "en" : "pt";
+    localStorage.setItem(LANG_KEY, currentLang);
+    html.lang = currentLang === "en" ? "en" : "pt-BR";
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      const translated = t(key);
+      if (translated) {
+        el.textContent = translated;
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.dataset.i18nPlaceholder;
+      const translated = t(key);
+      if (translated) {
+        el.placeholder = translated;
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+      const key = el.dataset.i18nAriaLabel;
+      const translated = t(key);
+      if (translated) {
+        el.setAttribute("aria-label", translated);
+      }
+    });
+
+    langButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.setLang === currentLang);
+    });
+
+    const effectsEnabled = !body.classList.contains("effects-off");
+    effectsToggle.textContent = effectsEnabled ? t("effects_disable") : t("effects_enable");
+  }
+
+  function setActiveTab(tabId) {
+    tabButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tab === tabId);
+    });
+
+    tabPanels.forEach((panel) => {
+      panel.classList.toggle("active", panel.id === tabId);
+    });
+  }
+
+  function setMode(mode) {
+    const normalizedMode = mode === "interactive" ? "interactive" : "standard";
+    body.classList.remove("mode-standard", "mode-interactive");
+    body.classList.add(`mode-${normalizedMode}`);
+    localStorage.setItem(MODE_KEY, normalizedMode);
+  }
+
+  function setEffects(enabled) {
+    body.classList.toggle("effects-off", !enabled);
+    effectsToggle.textContent = enabled ? t("effects_disable") : t("effects_enable");
+    localStorage.setItem(EFFECTS_KEY, enabled ? "on" : "off");
+
+    if (enabled) {
+      startMatrix();
+    } else {
+      stopMatrix();
+    }
+  }
+
+  function initTabs() {
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
+    });
+  }
+
+  function initModePicker() {
+    const savedMode = localStorage.getItem(MODE_KEY);
+    if (savedMode === "standard" || savedMode === "interactive") {
+      setMode(savedMode);
+      modePicker.classList.add("hidden");
+    }
+
+    chooseModeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setMode(btn.dataset.chooseMode);
+        modePicker.classList.add("hidden");
+      });
+    });
+  }
+
+  function initLanguageControl() {
+    const savedLang = localStorage.getItem(LANG_KEY);
+    applyLanguage(savedLang === "en" ? "en" : "pt");
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyLanguage(btn.dataset.setLang);
+      });
+    });
+  }
+
+  function initEffectsControl() {
+    const savedEffects = localStorage.getItem(EFFECTS_KEY);
+    const enabled = savedEffects !== "off";
+    setEffects(enabled);
+
+    effectsToggle.addEventListener("click", () => {
+      const currentlyEnabled = !body.classList.contains("effects-off");
+      setEffects(!currentlyEnabled);
+    });
+  }
+
+  function initContactForm() {
+    if (!contactForm) return;
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const subject = String(formData.get("subject") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+
+      const finalSubject = subject || t("mail_subject_default");
+      const bodyText = [
+        `${t("mail_label_name")}: ${name}`,
+        `${t("mail_label_email")}: ${email}`,
+        "",
+        message,
+      ].join("\n");
+
+      const mailtoLink =
+        `mailto:${EMAIL_TARGET}?subject=${encodeURIComponent(finalSubject)}` +
+        `&body=${encodeURIComponent(bodyText)}`;
+
+      window.location.href = mailtoLink;
+    });
+  }
+
+  function startMatrix() {
+    if (matrixRunning) return;
+    matrixRunning = true;
+
+    const canvas = document.getElementById("matrixCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&*@!?";
+    const fontSize = 16;
+    let drops = [];
+    let lastTimestamp = 0;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const columns = Math.floor(canvas.width / fontSize);
+      drops = Array.from({ length: columns }, () => Math.random() * -100);
+    }
+
+    function draw(timestamp) {
+      if (!matrixRunning) return;
+
+      if (timestamp - lastTimestamp < 42) {
+        matrixAnimationId = requestAnimationFrame(draw);
+        return;
+      }
+      lastTimestamp = timestamp;
+
+      ctx.fillStyle = "rgba(2, 8, 3, 0.12)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `${fontSize}px Share Tech Mono`;
+      ctx.fillStyle = "#45ff83";
+
+      for (let i = 0; i < drops.length; i += 1) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i] += 0.88;
+      }
+
+      matrixAnimationId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    matrixResizeHandler = resize;
+    window.addEventListener("resize", matrixResizeHandler);
+    matrixAnimationId = requestAnimationFrame(draw);
+  }
+
+  function stopMatrix() {
+    matrixRunning = false;
+    if (matrixAnimationId !== null) {
+      cancelAnimationFrame(matrixAnimationId);
+      matrixAnimationId = null;
+    }
+    if (matrixResizeHandler) {
+      window.removeEventListener("resize", matrixResizeHandler);
+      matrixResizeHandler = null;
+    }
+
+    const canvas = document.getElementById("matrixCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function init() {
+    initTabs();
+    initModePicker();
+    initLanguageControl();
+    initEffectsControl();
+    initContactForm();
+  }
+
+  init();
+})();
