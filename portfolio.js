@@ -106,7 +106,7 @@ pt: {
   mail_label_name: "Nome",
   mail_label_email: "E-mail"
 }
-    },
+  
     en: {
       mode_label: "Main Mode",
       mode_title: "Choose the portfolio type",
